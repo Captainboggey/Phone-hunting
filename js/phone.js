@@ -1,23 +1,24 @@
 // console.log('js connected')
 
-const loadData = async () => {
+const loadData = async (search) => {
   const res = await fetch(
-    " https://openapi.programming-hero.com/api/phones?search=iphone"
+    ` https://openapi.programming-hero.com/api/phones?search=${search}`
   );
   const data = await res.json();
   const phones = data.data;
   displayPhones(phones);
 };
-loadData();
+
 
 const displayPhones = (hibijibi) => {
   console.log(hibijibi);
   const phoneContainer = document.getElementById('div-conatiner');
+  phoneContainer.textContent='';
 
   hibijibi.forEach((phone) => {
     // console.log(phone)
     const phoneCard = document.createElement('div');
-    phoneCard.classList =`card bg-base-100 w-96 shadow-xl`
+    phoneCard.classList =`card bg-gray-100 p-4 shadow-xl` 
     phoneCard.innerHTML = `
         <figure>
      <img
@@ -34,3 +35,12 @@ const displayPhones = (hibijibi) => {
   phoneContainer.appendChild(phoneCard)
   });
 };
+
+const searchButton = ()=>{
+//    console.log('clicked')
+const search =document.getElementById('search')
+const searchText = search.value;
+loadData(searchText)
+
+
+}
