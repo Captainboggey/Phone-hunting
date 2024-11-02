@@ -14,6 +14,16 @@ const displayPhones = (hibijibi) => {
   console.log(hibijibi);
   const phoneContainer = document.getElementById('div-conatiner');
   phoneContainer.textContent='';
+  const showAll = document.getElementById('show-all')
+  if(hibijibi.length >12){
+       showAll.classList.remove('hidden')
+  }else{
+    showAll.classList.add('hidden')
+  }
+
+
+
+  hibijibi = hibijibi.slice(0,12);
 
   hibijibi.forEach((phone) => {
     // console.log(phone)
