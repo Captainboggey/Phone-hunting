@@ -9,26 +9,23 @@ const loadData = async (search) => {
   displayPhones(phones);
 };
 
-
 const displayPhones = (hibijibi) => {
   console.log(hibijibi);
-  const phoneContainer = document.getElementById('div-conatiner');
-  phoneContainer.textContent='';
-  const showAll = document.getElementById('show-all')
-  if(hibijibi.length >12){
-       showAll.classList.remove('hidden')
-  }else{
-    showAll.classList.add('hidden')
+  const phoneContainer = document.getElementById("div-conatiner");
+  phoneContainer.textContent = "";
+  const showAll = document.getElementById("show-all");
+  if (hibijibi.length > 12) {
+    showAll.classList.remove("hidden");
+  } else {
+    showAll.classList.add("hidden");
   }
 
-
-
-  hibijibi = hibijibi.slice(0,12);
+  hibijibi = hibijibi.slice(0, 12);
 
   hibijibi.forEach((phone) => {
     // console.log(phone)
-    const phoneCard = document.createElement('div');
-    phoneCard.classList =`card bg-gray-100 p-4 shadow-xl` 
+    const phoneCard = document.createElement("div");
+    phoneCard.classList = `card bg-gray-100 p-4 shadow-xl`;
     phoneCard.innerHTML = `
         <figure>
      <img
@@ -42,15 +39,25 @@ const displayPhones = (hibijibi) => {
      <button class="btn btn-primary">Buy Now</button>
      </div>
   </div>`;
-  phoneContainer.appendChild(phoneCard)
+    phoneContainer.appendChild(phoneCard);
   });
+  loadingSpinner(false)
 };
 
-const searchButton = ()=>{
-//    console.log('clicked')
-const search =document.getElementById('search')
-const searchText = search.value;
-loadData(searchText)
+const searchButton = () => {
+  //    console.log('clicked')
+  loadingSpinner(true)
+  const search = document.getElementById("search");
+  const searchText = search.value;
+  loadData(searchText);
+};
 
-
-}
+// loading spinner
+const loadingSpinner = (isLoading) => {
+  const toggleSpinner = document.getElementById("loading-spinner");
+  if (isLoading) {
+    toggleSpinner.classList.remove("hidden");
+  }else{
+    toggleSpinner.classList.add('hidden')
+  }
+};
