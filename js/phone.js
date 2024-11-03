@@ -1,26 +1,30 @@
 // console.log('js connected')
 
-const loadData = async (search) => {
+const loadData = async (search,isShowAll) => {
   const res = await fetch(
     ` https://openapi.programming-hero.com/api/phones?search=${search}`
   );
   const data = await res.json();
   const phones = data.data;
-  displayPhones(phones);
+  displayPhones(phones,isShowAll);
 };
 
-const displayPhones = (hibijibi) => {
+const displayPhones = (hibijibi,isShowAll) => {
   console.log(hibijibi);
   const phoneContainer = document.getElementById("div-conatiner");
   phoneContainer.textContent = "";
   const showAll = document.getElementById("show-all");
-  if (hibijibi.length > 12) {
+  if (hibijibi.length > 12 && !isShowAll) {
     showAll.classList.remove("hidden");
   } else {
     showAll.classList.add("hidden");
   }
 
+  
+
+ if(!isShowAll){
   hibijibi = hibijibi.slice(0, 12);
+ }
 
   hibijibi.forEach((phone) => {
     // console.log(phone)
@@ -44,12 +48,12 @@ const displayPhones = (hibijibi) => {
   loadingSpinner(false)
 };
 
-const searchButton = () => {
+const searchButton = (isShowAll) => {
   //    console.log('clicked')
   loadingSpinner(true)
   const search = document.getElementById("search");
   const searchText = search.value;
-  loadData(searchText);
+  loadData(searchText,isShowAll);
 };
 
 // loading spinner
@@ -61,3 +65,9 @@ const loadingSpinner = (isLoading) => {
     toggleSpinner.classList.add('hidden')
   }
 };
+
+const handleShowAllBtn = ()=>{
+  searchButton(true);
+
+
+}
