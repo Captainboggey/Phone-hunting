@@ -9,12 +9,12 @@ const loadData = async (search,isShowAll) => {
   displayPhones(phones,isShowAll);
 };
 
-const displayPhones = (hibijibi,isShowAll) => {
-  console.log(hibijibi);
+const displayPhones = (phone,isShowAll) => {
+  console.log(phone);
   const phoneContainer = document.getElementById("div-conatiner");
   phoneContainer.textContent = "";
   const showAll = document.getElementById("show-all");
-  if (hibijibi.length > 12 && !isShowAll) {
+  if (phone.length > 12 && !isShowAll) {
     showAll.classList.remove("hidden");
   } else {
     showAll.classList.add("hidden");
@@ -23,10 +23,10 @@ const displayPhones = (hibijibi,isShowAll) => {
   
 
  if(!isShowAll){
-  hibijibi = hibijibi.slice(0, 12);
+  phone = phone.slice(0, 12);
  }
 
-  hibijibi.forEach((phone) => {
+  phone.forEach((phone) => {
     // console.log(phone)
     const phoneCard = document.createElement("div");
     phoneCard.classList = `card bg-gray-100 p-4 shadow-xl`;
@@ -39,8 +39,8 @@ const displayPhones = (hibijibi,isShowAll) => {
      <div class="card-body">
      <h2 class="card-title">${phone.phone_name}</h2>
      <p>If a dog chews shoes whose shoes does he choose?</p>
-     <div class="card-actions justify-end">
-     <button class="btn btn-primary">Buy Now</button>
+     <div class="card-actions justify-center">
+     <button onclick="handleShowDetails('${phone.slug}')" class="btn btn-primary">Show Details</button>
      </div>
   </div>`;
     phoneContainer.appendChild(phoneCard);
@@ -55,6 +55,16 @@ const searchButton = (isShowAll) => {
   const searchText = search.value;
   loadData(searchText,isShowAll);
 };
+
+
+const handleShowDetails = async(id)=>{
+  console.log('clicked')
+  const res = await fetch(`https://openapi.programming-hero.com/api/phone/${id}`);
+  const data =await res.json();
+  console.log(data)
+  
+
+}
 
 // loading spinner
 const loadingSpinner = (isLoading) => {

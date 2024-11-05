@@ -1,52 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Phone Hunting</title>
     <!-- tailwind and daisyUi -->
-     
-<link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.14/dist/full.min.css" rel="stylesheet" type="text/css" />
-<script src="https://cdn.tailwindcss.com"></script>
 
-
-
-</head>
-<body>
+    <link
+      href="https://cdn.jsdelivr.net/npm/daisyui@4.12.14/dist/full.min.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body>
     <header>
-        <h1 class="text-6xl">Phone Hunting</h1>
-        
+      <h1 class="text-6xl">Phone Hunting</h1>
     </header>
     <main class="container mx-auto mt-10">
-<!-- text -b0x -->
-<section>
-    <div class=" mb-10 p-4">
-        <input id="search" type="text" placeholder="Search" class="input input-ghost w-full max-w-xs " />
-        <button onclick="searchButton()" class="btn btn-active btn-accent">Search</button>
-    </div>
-    
-</section>
+      <!-- text -b0x -->
+      <section>
+        <div class="mb-10 p-4">
+          <input
+            id="search"
+            type="text"
+            placeholder="Search"
+            class="input input-ghost w-full max-w-xs"
+          />
+          <button onclick="searchButton()" class="btn btn-active btn-accent">
+            Search
+          </button>
+        </div>
+      </section>
 
-        <!-- search content -->
-        <section>
-            <div id="loading-spinner" class="text-center my-40 hidden"> 
-                <span class="loading loading-spinner text-error"></span>
-            </div>
-            <div id="div-conatiner" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <!-- search content -->
+      <section>
+        <div id="loading-spinner" class="text-center my-40 hidden">
+          <span class="loading loading-spinner text-error"></span>
+        </div>
+        <div
+          id="div-conatiner"
+          class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"
+        ></div>
+        <div id="show-all" class="hidden text-center my-8">
+          <button
+            onclick="handleShowAllBtn()"
+            class="btn btn-active btn-accent"
+          >
+            Show All
+          </button>
+        </div>
+      </section>
 
-
-            </div>
-            <div id="show-all" class="hidden text-center my-8"><button onclick="handleShowAllBtn()" class="btn btn-active btn-accent ">Show All</button></div>
-        </section>
-
-
+      <!-- modal -->
+      <!-- Open the modal using ID.showModal() method -->
+      <button class="btn" onclick="show_details_modal.showModal()">open modal</button>
+      <dialog id="show_details_modal" class="modal modal-bottom sm:modal-middle">
+        <div class="modal-box">
+          <h3 class="text-lg font-bold">Hello!</h3>
+          <p class="py-4">Press ESC key or click the button below to close</p>
+          <div class="modal-action">
+            <form method="dialog">
+              <!-- if there is a button in form, it will close the modal -->
+              <button class="btn">Close</button>
+            </form>
+          </div>
+        </div>
+      </dialog>
     </main>
-     <footer>
-
-
-     </footer>
-     <script src="/js/phone.js"></script>
-
-    
-</body>
+    <footer></footer>
+    <script src="/js/phone.js"></script>
+  </body>
 </html>
