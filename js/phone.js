@@ -1,6 +1,6 @@
 // console.log('js connected')
 
-const loadData = async (search,isShowAll) => {
+const loadData = async (search=13,isShowAll) => {
   const res = await fetch(
     ` https://openapi.programming-hero.com/api/phones?search=${search}`
   );
@@ -61,9 +61,37 @@ const handleShowDetails = async(id)=>{
   console.log('clicked')
   const res = await fetch(`https://openapi.programming-hero.com/api/phone/${id}`);
   const data =await res.json();
-  console.log(data)
+  const phone = data.data;
+  // console.log(data)
+  showModal(phone)
   
 
+}
+
+const showModal = (phone)=>{
+  show_details_modal.showModal()
+  console.log(phone)
+  const modalPhoneName = document.getElementById('modal-phone-name');
+  modalPhoneName.innerText = phone.name;
+  const modalContainer = document.getElementById('modal-container');
+  modalContainer.innerHTML =`
+    <img src="${phone.image}">
+    <p>${phone?.brand}</p>
+    <p>${phone?.mainFeatures?.chipSet}</p>
+    <p>${phone?.mainFeatures?.displaySize}</p>
+    <p>${phone?.mainFeatures?.memory}</p>
+    <p>${phone?.mainFeatures?.sensors}</p>
+    <p>${phone?.mainFeatures?.storage}</p>
+    <p>${phone?.others?.Bluetooth}</p>
+    <p>${phone?.others?.GPS}</p>
+    <p>${phone?.others?.NFC}</p>
+    <p>${phone?.others?.Radio}</p>
+    <p>${phone?.others?.USB}</p>
+    <p>${phone?.others?.WLAN}</p>
+
+
+  
+  `
 }
 
 // loading spinner
@@ -81,3 +109,5 @@ const handleShowAllBtn = ()=>{
 
 
 }
+
+loadData()
